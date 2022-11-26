@@ -4,4 +4,9 @@ export default class UpdateUserRequestDto{
         private password : string,
         private name : string
     ){}
+
+    static createFromRequest(request : any){
+        const {email, password, name, ...etc} = request.body
+        return new UpdateUserRequestDto(email, password, name)
+    }
 }

@@ -3,4 +3,9 @@ export default class LoginRequestDto{
         private email : string,
         private password : string
     ){}
+
+    static createFromRequest(request : any){
+        const {email, password, ...etc} = request.body
+        return new LoginRequestDto(email, password)
+    }
 }

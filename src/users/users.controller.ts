@@ -1,9 +1,11 @@
 import { Controller, Get, Post, Put } from '@nestjs/common';
-import { LoginRequestDecorator } from 'src/common/decorator/login.request.decorator';
-import { SignupRequestDecorator } from 'src/common/decorator/signup.request.decorator';
-import { UserDecorator } from 'src/common/decorator/user.decorator';
+import { RequestDtoDecorator } from 'src/common/decorator/request-dto.decorator';
+import ActivateAccountRequestDto from 'src/common/dto/request/activate-account.request.dto';
 import LoginRequestDto from 'src/common/dto/request/login.request.dto';
+import resetPasswordRequestDto from 'src/common/dto/request/reset-password.dto';
+import ResetTokenRequestDto from 'src/common/dto/request/reset-token.request.dto';
 import SignupRequestDto from 'src/common/dto/request/signup.request.dto';
+import UpdateUserRequestDto from 'src/common/dto/request/update-user.request.dto';
 
 @Controller('users')
 export class UsersController {
@@ -12,28 +14,26 @@ export class UsersController {
 
     @Post("/signup")
     signup (
-        @SignupRequestDecorator() signupRequestDto : SignupRequestDto
+        @RequestDtoDecorator(SignupRequestDto) signupRequestDto
     ) : string {
-        return "boid"
+        return signupRequestDto
     }
 
     @Post("/login")
     login (
-        @LoginRequestDecorator() loginRequestDto : LoginRequestDto
+        @RequestDtoDecorator(LoginRequestDto) loginREquestDto
     ) : string {
-        return "boid"
+        return loginREquestDto
     }
 
     @Post("/logout")
     logout (
-        @UserDecorator() user
     ) : string {
         return "boid"
     }
 
     @Get("/account")
     getUser (
-        @UserDecorator() user
     ) : string {
         return "boid"
     }
@@ -41,25 +41,31 @@ export class UsersController {
 
     @Put("/account")
     updateUser (
-        @UserDecorator() user
+        @RequestDtoDecorator(UpdateUserRequestDto) updateUserRequestDto
     ) : string {
-        return "boid"
+        return updateUserRequestDto
     }
 
 
     @Post("/resetToken")
-    getResetToken () : string {
-        return "boid"
+    getResetToken (
+        @RequestDtoDecorator(ResetTokenRequestDto) resetTokenRequestDto
+    ) : string {
+        return resetTokenRequestDto
     }
 
     @Post("/resetPassword")
-    resetPassword () : string {
-        return "boid"
+    resetPassword (
+        @RequestDtoDecorator(resetPasswordRequestDto) resetPasswordRequestDto
+    ) : string {
+        return resetPasswordRequestDto
     }
 
     @Post("/activate")
-    activatedUser () : string {
-        return "boid"
+    activatedUser (
+        @RequestDtoDecorator(ActivateAccountRequestDto) activateAccountREquestDto
+    ) : string {
+        return activateAccountREquestDto
     }
 }
 
